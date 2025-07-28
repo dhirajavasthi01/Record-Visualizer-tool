@@ -11,7 +11,7 @@ const Navbar = () => {
       <Link
         to="/"
         className={`flex items-center gap-2 px-3 py-2 rounded-md ${
-          location.pathname === "/" ? "bg-gray-800 text-white" : "text-gray-800"
+          location.pathname === "/" ? "bg-gray-800 text-white" : "text-gray-800 text-white"
         }`}
       >
         <LayoutDashboard className="w-4 h-4" />
@@ -20,7 +20,7 @@ const Navbar = () => {
       <Link
         to="/records"
         className={`flex items-center gap-2 px-3 py-2 rounded-md ${
-          location.pathname === "/records" ? "bg-gray-800 text-white" : "text-gray-800"
+          location.pathname === "/records" ? "bg-gray-800 text-white" : "text-gray-800 text-white"
         }`}
       >
         <Table className="w-4 h-4" />
