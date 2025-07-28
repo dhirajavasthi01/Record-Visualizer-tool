@@ -15,7 +15,7 @@ const Navbar = () => {
         }`}
       >
         <LayoutDashboard className="w-4 h-4" />
-        Dashboard
+        <div onClick={()=>setIsOpen(false)}>Dashboard</div>
       </Link>
       <Link
         to="/records"
@@ -24,7 +24,7 @@ const Navbar = () => {
         }`}
       >
         <Table className="w-4 h-4" />
-        Records
+         <div onClick={()=>setIsOpen(false)}>Records</div>
       </Link>
     </nav>
   );

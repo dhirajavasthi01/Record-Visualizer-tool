@@ -1,5 +1,6 @@
 import  { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "./ui/button";
 
 const ExpandableStatCard = ({
   title,
@@ -22,12 +23,7 @@ const ExpandableStatCard = ({
           <div key={key}>{key}: <strong>{value}</strong></div>
         ))}
         {entries.length > 5 && (
-          <button
-            className="text-xs text-blue-600 hover:underline mt-2"
-            onClick={() => setExpanded(!expanded)}
-          >
-            {expanded ? "Show Less" : "Show More"}
-          </button>
+          <Button className="px-0" variant="link" onClick={() => setExpanded(!expanded)}>{expanded ? "Show Less" : "Show More"}</Button>
         )}
       </CardContent>
     </Card>

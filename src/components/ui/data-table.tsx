@@ -42,7 +42,7 @@ export function DataTable<TData, TValue>({
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
-    manualPagination: false, // allow client-side paging
+    manualPagination: false,
     pageCount: Math.ceil(data.length / pagination.pageSize),
   });
 
