@@ -47,7 +47,7 @@ const Navbar = () => {
 
       {/* Mobile Dropdown Nav */}
       {isOpen && (
-        <div className="md:hidden fixed top-14 left-0 w-full bg-white shadow-md z-40">
+        <div className="md:hidden fixed top-14 left-0 w-full bg-gray-900 shadow-md z-40">
           {navLinks}
         </div>
       )}
