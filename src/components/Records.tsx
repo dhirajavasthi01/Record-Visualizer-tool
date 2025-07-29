@@ -63,11 +63,14 @@ const Records = () => {
           ))}
 
           {hasMore && (
-            <div ref={loaderRef} className="text-center py-4 text-sm text-gray-500">
+            <div
+              ref={loaderRef}
+              className="h-10 text-center flex items-center justify-center text-sm text-gray-500"
+              style={{ visibility: "visible" }}
+            >
               Loading more...
             </div>
           )}
-
         </div>
       )}
     </div>

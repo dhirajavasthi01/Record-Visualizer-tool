@@ -1,32 +1,34 @@
-import { useEffect, useRef, useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
-export const useInfiniteScroll = (items: any[], chunkSize = 10) => {
-  const [visibleItems, setVisibleItems] = useState<any[]>([]);
+export function useInfiniteScroll<T>(data: T[], step: number = 10) {
+  const [visibleItems, setVisibleItems] = useState<T[]>([]);
   const [hasMore, setHasMore] = useState(true);
   const loaderRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    setVisibleItems(items.slice(0, chunkSize));
-  }, [items]);
+    setVisibleItems(data.slice(0, step));
+    setHasMore(data.length > step);
+  }, [data, step]);
 
   useEffect(() => {
-    if (!loaderRef.current || !hasMore) return;
+    const observer = new IntersectionObserver((entries) => {
+      const entry = entries[0];
+      if (entry.isIntersecting && hasMore) {
+        setVisibleItems((prev) => {
+          const next = data.slice(0, prev.length + step);
+          setHasMore(next.length < data.length ? true : false);
+          return next;
+        });
+      }
+    });
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && hasMore) {
-          const nextItems = items.slice(0, visibleItems.length + chunkSize);
-          setVisibleItems(nextItems);
-          setHasMore(nextItems.length < items.length);
-        }
-      },
-      { threshold: 1 }
-    );
+    const loader = loaderRef.current;
+    if (loader) observer.observe(loader);
 
-    observer.observe(loaderRef.current);
-
-    return () => observer.disconnect();
-  }, [visibleItems, hasMore, items]);
+    return () => {
+      if (loader) observer.unobserve(loader);
+    };
+  }, [loaderRef, data, hasMore, step]);
 
   return { visibleItems, loaderRef, hasMore };
-};
+}
